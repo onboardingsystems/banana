@@ -30,6 +30,7 @@ defmodule Banana.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:httpoison, "~> 0.11.1"}]
+    [{:httpoison, "~> 0.11.1"},
+     {:plug, "~> 1.3"}]
   end
 end
