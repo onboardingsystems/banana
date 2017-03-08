@@ -1,19 +1,33 @@
 # Banana
 
-**TODO: Add description**
+Library to support connecting and interacting with Gru by a Minion.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `banana` to your list of dependencies in `mix.exs`:
-
 ```elixir
 def deps do
-  [{:banana, "~> 0.1.0"}]
+  [{:banana, "https://github.com/onboardingsystems/banana.git"}]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/banana](https://hexdocs.pm/banana).
+Add banana to your minion by adding it as a worker to your application supervisor.
 
+```elixir
+worker(Banana, [])
+```
+
+## Configuration
+
+In your minion add the following configuration.
+
+```elixir
+config :banana, :gru,
+  host: "127.0.0.1",
+  port: "3009",
+  interval: register_interval
+
+config :banana, :minion,
+  name: "minion_name",
+  host: "127.0.0.1",
+  port: "3007"
+```
