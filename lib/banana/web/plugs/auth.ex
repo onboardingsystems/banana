@@ -10,11 +10,15 @@ defmodule Banana.Web.Plugs.Auth do
     if authorize get_req_header(conn, "authorization") do
       conn
     else
-      conn
-      |> put_resp_content_type("application/json")
-      |> send_resp(403, "{\"errors\":\"Access Forbidden\"}")
-      |> halt
+      forbidden conn
     end
+  end
+
+  defp forbidden(conn) do
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(403, "{\"errors\":\"Access Forbidden\"}")
+    |> halt
   end
 
   defp authorize(["Basic " <> credentials | _any_other_entries]) do
@@ -24,6 +28,10 @@ defmodule Banana.Web.Plugs.Auth do
       |> String.replace(":", "")
 
     key == Application.get_env(:banana, :private_key, "pk_dev")
+  catch
+    _ -> false
+  rescue
+    _ -> false
   end
   defp authorize(_), do: nil
 end
