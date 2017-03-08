@@ -5,12 +5,12 @@ defmodule Banana do
   """
   use GenServer
 
-  def start_link(state) do
-    GenServer.start_link(__MODULE__, state)
+  def start_link do
+    GenServer.start_link(__MODULE__, %{})
   end
 
   def init(state) do
-    send(self, :tick)
+    send(self(), :tick)
     {:ok, state}
   end
 
@@ -28,14 +28,14 @@ defmodule Banana do
     gru_settings = Application.get_env :banana, :gru
     interval = Keyword.get gru_settings, :register_interval, 30_000
 
-    Process.send_after(self, :tick, interval)
+    Process.send_after(self(), :tick, interval)
   end
 
 
   def register do
     gru_settings = Application.get_env :banana, :gru, []
-    gru_host = Keyword.get settings, :host, "127.0.0.1"
-    gru_port = Keyword.get settings, :port, "3009"
+    gru_host = Keyword.get gru_settings, :host, "127.0.0.1"
+    gru_port = Keyword.get gru_settings, :port, "3009"
 
     minion_settings = Application.get_env :banana, :minion, []
     name = Keyword.get minion_settings, :name, "minion_set_name_in_config"
