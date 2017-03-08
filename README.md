@@ -24,7 +24,7 @@ In your minion add the following configuration.
 config :banana, :gru,
   host: "127.0.0.1",
   port: "3009",
-  interval: register_interval
+  interval: 30_000
 
 config :banana, :minion,
   name: "minion_name",
