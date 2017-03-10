@@ -47,7 +47,7 @@ defmodule Banana.Cache do
       {"Accept", "application/json"}
     ]
 
-    {:ok, %{body: body} = HTTPoison.get(url, headers)
+    {:ok, %{body: body}} = HTTPoison.get(url, headers)
     body["value"]
   end
 

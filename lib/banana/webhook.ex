@@ -4,7 +4,7 @@ defmodule Banana.Webhook do
     gru_host = Keyword.get gru_settings, :host, "127.0.0.1"
     gru_port = Keyword.get gru_settings, :port, "3009"
 
-    url = "http://#{gru_host}:#{gru_port}/cache"
+    gru_url = "http://#{gru_host}:#{gru_port}/cache"
 
     body = %{
       "url" => url,
@@ -17,6 +17,6 @@ defmodule Banana.Webhook do
       {"Content-Type", "application/json"}
     ]
 
-    HTTPoison.post(url, Poison.encode!(body), headers)
+    HTTPoison.post(gru_url, Poison.encode!(body), headers)
   end
 end
