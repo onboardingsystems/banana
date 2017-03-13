@@ -9,7 +9,7 @@ defmodule Banana.Webhook do
     body = %{
       "url" => url,
       "content_type" => content_type,
-      "message" => message
+      "message" => Poison.encode!(message)
     }
 
     headers = [
