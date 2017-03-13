@@ -48,7 +48,7 @@ defmodule Banana.Cache do
     ]
 
     {:ok, %{body: body}} = HTTPoison.get(url, headers)
-    body["value"]
+    Poison.decode!(body)["value"]
   end
 
   def delete(key) do
