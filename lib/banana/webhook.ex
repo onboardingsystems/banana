@@ -5,8 +5,11 @@ defmodule Banana.Webhook do
     gru_port = Keyword.get gru_settings, :port, "3009"
 
     gru_url = "http://#{gru_host}:#{gru_port}/webhook"
+    minion_settings = Application.get_env :banana, :minion, []
+    minion_name = Keyword.get minion_settings, :name, "minion_set_name_in_config"
 
     body = %{
+      "minion" => minion_name,
       "url" => url,
       "content_type" => content_type,
       "message" => Poison.encode!(message)
