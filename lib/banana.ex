@@ -34,15 +34,15 @@ defmodule Banana do
 
   def register do
     gru_settings = Application.get_env :banana, :gru, []
-    gru_host = Keyword.get gru_settings, :host, "127.0.0.1"
+    gru_host = Keyword.get gru_settings, :host, "http://localhost"
     gru_port = Keyword.get gru_settings, :port, "3009"
 
     minion_settings = Application.get_env :banana, :minion, []
     name = Keyword.get minion_settings, :name, "minion_set_name_in_config"
-    host = Keyword.get minion_settings, :host, "127.0.0.1"
+    host = Keyword.get minion_settings, :host, "http://localhost"
     port = Keyword.get minion_settings, :port, "3007"
 
-    url = "http://#{gru_host}:#{gru_port}/ping"
+    url = "#{gru_host}:#{gru_port}/ping"
     body = Poison.encode!(%{
       "minion_key" => name,
       "host" => host,
