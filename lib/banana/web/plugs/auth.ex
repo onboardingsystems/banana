@@ -5,7 +5,7 @@ defmodule Banana.Web.Plugs.Auth do
   import Plug.Conn
 
   def init(opts), do: opts
-  
+
   def call(conn, _opts) do
     if authorize get_req_header(conn, "authorization") do
       conn
@@ -28,9 +28,9 @@ defmodule Banana.Web.Plugs.Auth do
       |> String.replace(":", "")
 
     key == Application.get_env(:banana, :private_key, "pk_dev")
-  catch
-    _ -> false
   rescue
+    _ -> false
+  catch
     _ -> false
   end
   defp authorize(_), do: nil
