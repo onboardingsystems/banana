@@ -4,6 +4,7 @@ defmodule Banana do
   Will register the local minion with Gru.
   """
   use GenServer
+  require Logger
 
   def start_link do
     GenServer.start_link(__MODULE__, %{})
@@ -52,6 +53,15 @@ defmodule Banana do
       {"Accept", "application/json"},
       {"Content-Type", "application/json"}
     ]
-    HTTPoison.post(url, body, headers)
+    case HTTPoison.post(url, body, headers) do
+      {:ok, %{status_code: code}} = success when code in 200..299 ->
+        success
+      {:ok, error} ->
+        Logger.error("Banana failed to register #{inspect body}: #{inspect error}")
+        {:ok, error}
+      {:error, error}->
+        Logger.error("Banana failed to register #{inspect body}: #{inspect error}")
+        {:error, error}
+    end
   end
 end
