@@ -55,12 +55,13 @@ defmodule Banana do
     ]
     case HTTPoison.post(url, body, headers) do
       {:ok, %{status_code: code}} = success when code in 200..299 ->
+        Logger.debug("Banana: Registered with Gru(#{url}): #{inspect body}")
         success
       {:ok, error} ->
-        Logger.error("Banana failed to register #{inspect body}: #{inspect error}")
+        Logger.error("Banana: Failed to register with Gru(#{url}): #{inspect body}: #{inspect error}")
         {:ok, error}
       {:error, error}->
-        Logger.error("Banana failed to register #{inspect body}: #{inspect error}")
+        Logger.error("Banana: Failed to register with Gru(#{url}): #{inspect error}")
         {:error, error}
     end
   end
