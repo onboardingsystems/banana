@@ -4,7 +4,7 @@ defmodule Banana.Webhook do
     gru_host = Keyword.get gru_settings, :host, "127.0.0.1"
     gru_port = Keyword.get gru_settings, :port, "3009"
 
-    gru_url = "http://#{gru_host}:#{gru_port}/webhook"
+    gru_url = "#{gru_host}:#{gru_port}/webhook"
     minion_settings = Application.get_env :banana, :minion, []
     minion_name = Keyword.get minion_settings, :name, "minion_set_name_in_config"
 

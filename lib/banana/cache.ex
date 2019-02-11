@@ -13,7 +13,7 @@ defmodule Banana.Cache do
 
     key = "#{name}_#{key}"
 
-    url = "http://#{gru_host}:#{gru_port}/cache"
+    url = "#{gru_host}:#{gru_port}/cache"
 
     body = %{
       "key" => key,
@@ -41,7 +41,7 @@ defmodule Banana.Cache do
 
     key = "#{name}_#{key}"
 
-    url = "http://#{gru_host}:#{gru_port}/cache/#{key}"
+    url = "#{gru_host}:#{gru_port}/cache/#{key}"
 
     headers = [
       {"Accept", "application/json"}
@@ -61,7 +61,7 @@ defmodule Banana.Cache do
 
     key = "#{name}_#{key}"
 
-    url = "http://#{gru_host}:#{gru_port}/cache/#{key}"
+    url = "#{gru_host}:#{gru_port}/cache/#{key}"
 
     headers = [
       {"Accept", "application/json"}
